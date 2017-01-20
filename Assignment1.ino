@@ -66,7 +66,7 @@ void setup()
     Serial.print(' ');
   }
   Serial.println();
-  Serial.println();
+  Serial.print("#");
 }
 
 void loop()
@@ -89,11 +89,10 @@ void loop()
       motors.setLeftSpeed(0);
       motors.setRightSpeed(0);
       delay(500);
-      Serial.println();
       Serial.print(string1 + (numberOfRooms + 1));    //Display the room number
       Serial.println();
       Serial.print(rooms[numberOfRooms]);             //Display the direction of the room
-      Serial.println();
+      Serial.print("#");
       motors.setLeftSpeed(100);                       //Enter the Room
       motors.setRightSpeed(100);
       delay(400);
@@ -129,7 +128,7 @@ void loop()
         person[numberOfPeople] = string1 + String(numberOfRooms);   //Set the room as the location of the person
         numberOfPeople++;                                           //Increase the number of people
         Serial.print(string2);                                      //Display "Person found!" on serial
-        Serial.println();
+        Serial.print("#");
         found = false;                                              //Reset found to false
       }
       priorFeature = "Room " + String(numberOfRooms);               //Set the room as the latest thing that has happened
@@ -141,13 +140,15 @@ void loop()
         corner = false;                                   //Show that the corner behaviour is finished
         numberOfCorners++;                                //Increase the number of corners by 1
         priorFeature = "Turn " + String(numberOfCorners); //Set this corner as the latest thing that has happened
-        Serial.println("Turned Left")                     //Display which way the corner was turned
+        Serial.println("Turned Left");                     //Display which way the corner was turned
+        Serial.print("#");
       } else if (getData == 'd') {
         corners[numberOfCorners] = "Right";
         corner = false;
         numberOfCorners++;
         priorFeature = "Turn " + String(numberOfCorners);
-        Serial.println("Turned Right")
+        Serial.println("Turned Right");
+        Serial.print("#");
       }
     }
     if (getData == 'w') {                       //Direction keys for controlling the robot
@@ -188,9 +189,8 @@ void loop()
             numberOfPeople++;                                             //Increase the number of people found
             motors.setLeftSpeed(0);                                       //Stop the Zumo so that the person can be removed
             motors.setRightSpeed(0);
-            Serial.println();
             Serial.print("Person Found in Corridor after " + priorFeature); //Display a message stating that a person has been found in the corridor and the event it was after
-            Serial.println();
+            Serial.print("#");
           }
         }
       }
@@ -202,7 +202,8 @@ void loop()
         delay(300);
         motors.setLeftSpeed(0);           //Stop the Zumo
         motors.setRightSpeed(0);
-        Serial.println("Found Corner")    //Display a message showing a corner has been found
+        Serial.println("Found Corner");    //Display a message showing a corner has been found
+        Serial.print("#");
       } else if (sensorValues[0] > (mins[0] + 50)) {    //The outside sensors are less sensitive so that corners are detected more easily
         motors.setLeftSpeed(0);
         motors.setRightSpeed(0);
